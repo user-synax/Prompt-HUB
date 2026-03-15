@@ -106,13 +106,13 @@ export default function DashboardPage() {
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center text-indigo-400 font-bold text-xl">
                 <BookOpen className="h-8 w-8 mr-2" />
-                PromptBook
+                Prompt-Book
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={handleLogout}
-                className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
+                className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-500 hover:cursor-pointer transition-colors"
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout
@@ -131,7 +131,7 @@ export default function DashboardPage() {
           </div>
           <button
             onClick={() => setShowForm(true)}
-            className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold shadow-lg shadow-indigo-500/20 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold shadow-lg shadow-indigo-500/20 transition-all transform active:scale-[0.98] hover:cursor-pointer"
           >
             <Plus className="h-5 w-5 mr-2" />
             New Prompt
@@ -141,7 +141,7 @@ export default function DashboardPage() {
         {/* Filters and Search */}
         <div className="bg-brand-card p-6 rounded-2xl border border-brand-border shadow-xl mb-10 space-y-6">
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="flex-grow">
+            <div className="grow">
               <SearchBar onSearch={(q) => setFilters({ ...filters, search: q })} />
             </div>
             <div className="flex flex-wrap items-center gap-4">
@@ -162,7 +162,7 @@ export default function DashboardPage() {
               </div>
               <button
                 onClick={() => setFilters({ ...filters, favorite: !filters.favorite })}
-                className={`inline-flex items-center px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                className={`inline-flex hover:cursor-pointer items-center px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                   filters.favorite
                     ? 'bg-red-900/20 text-red-400 border border-red-900/50'
                     : 'bg-brand-input text-gray-400 border border-brand-border hover:bg-brand-border'
@@ -217,7 +217,7 @@ export default function DashboardPage() {
       {/* Create Form Modal */}
       {showForm && (
         <PromptForm
-          onSubmit={(data) => handleCreatePrompt(data as Record<string, unknown>)}
+          onSubmit={(data) => handleCreatePrompt(data as unknown as Record<string, unknown>)}
           onCancel={() => setShowForm(false)}
           isLoading={false}
         />

@@ -8,9 +8,10 @@ import { getUserId } from '@/middleware/auth';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await connectDB();
     const userId = await getUserId(req);
 
@@ -18,7 +19,7 @@ export async function GET(
       throw new AppError('Unauthorized', 401);
     }
 
-    const prompt = await Prompt.findOne({ _id: params.id, userId });
+    const prompt = await Prompt.findOne({ _id: id, userId });
 
     if (!prompt) {
       throw new AppError('Prompt not found', 404);
@@ -40,9 +41,10 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await connectDB();
     const userId = await getUserId(req);
 
@@ -59,7 +61,7 @@ export async function PUT(
     }
 
     const prompt = await Prompt.findOneAndUpdate(
-      { _id: params.id, userId },
+      { _id: id, userId },
       { $set: validatedData },
       { new: true, runValidators: true }
     );
@@ -84,9 +86,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await connectDB();
     const userId = await getUserId(req);
 
@@ -94,7 +97,7 @@ export async function DELETE(
       throw new AppError('Unauthorized', 401);
     }
 
-    const prompt = await Prompt.findOneAndDelete({ _id: params.id, userId });
+    const prompt = await Prompt.findOneAndDelete({ _id: id, userId });
 
     if (!prompt) {
       throw new AppError('Prompt not found or unauthorized', 404);
