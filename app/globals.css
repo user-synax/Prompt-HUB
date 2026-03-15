@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #333333;
+  --color-brand-card: #3d3d3d;
+  --color-brand-border: #4a4a4a;
+  --color-brand-input: #404040;
+}
+
+:root {
+  --foreground-rgb: 245, 245, 245;
+  --background-rgb: 51, 51, 51;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: var(--color-brand-bg);
+  min-height: 100vh;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+/* Custom scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #333;
+}
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
